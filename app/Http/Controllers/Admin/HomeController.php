@@ -176,7 +176,7 @@ class HomeController
 
         $settings6 = [
             'chart_title'           => 'Notifications',
-            'chart_type'            => 'line',
+            'chart_type'            => 'latest_entries',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\Models\UserAlert',
             'group_by_field'        => 'created_at',
@@ -187,11 +187,23 @@ class HomeController
             'group_by_field_format' => 'd-m-Y H:i:s',
             'column_class'          => 'col-md-6',
             'entries_number'        => '5',
-            'translation_key'       => 'userAlert',
+            'fields'                => [
+                'alert_text' => '',
+            ],
+            'translation_key' => 'userAlert',
         ];
 
-        $chart6 = new LaravelChart($settings6);
+        $settings6['data'] = [];
+        if (class_exists($settings6['model'])) {
+            $settings6['data'] = $settings6['model']::latest()
+                ->take($settings6['entries_number'])
+                ->get();
+        }
 
-        return view('home', compact('chart5', 'chart6', 'settings1', 'settings2', 'settings3', 'settings4'));
+        if (!array_key_exists('fields', $settings6)) {
+            $settings6['fields'] = [];
+        }
+
+        return view('home', compact('chart5', 'settings1', 'settings2', 'settings3', 'settings4', 'settings6'));
     }
 }
