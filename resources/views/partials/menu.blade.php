@@ -15,6 +15,16 @@
                 {{ trans('global.dashboard') }}
             </a>
         </li>
+        @can('sgp_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.sgps.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/sgps") || request()->is("admin/sgps/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.sgp.title') }}
+                </a>
+            </li>
+        @endcan
         @can('user_management_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }} {{ request()->is("admin/audit-logs*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
@@ -207,16 +217,6 @@
                         </li>
                     @endcan
                 </ul>
-            </li>
-        @endcan
-        @can('sgp_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.sgps.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/sgps") || request()->is("admin/sgps/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.sgp.title') }}
-                </a>
             </li>
         @endcan
         <li class="c-sidebar-nav-item">
