@@ -28,6 +28,15 @@
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.first_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.gender') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
@@ -71,9 +80,6 @@
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.address') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.gender') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.b_o_d') }}
@@ -132,6 +138,15 @@
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
+                                {{ $user->first_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->last_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\User::GENDER_SELECT[$user->gender] ?? '' }}
+                            </td>
+                            <td>
                                 {{ $user->email ?? '' }}
                             </td>
                             <td>
@@ -187,9 +202,6 @@
                             </td>
                             <td>
                                 {{ $user->address ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\Models\User::GENDER_SELECT[$user->gender] ?? '' }}
                             </td>
                             <td>
                                 {{ $user->b_o_d ?? '' }}

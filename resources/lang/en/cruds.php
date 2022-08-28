@@ -123,6 +123,10 @@ return [
             'contact_no_helper'            => ' ',
             'photo'                        => 'Photo',
             'photo_helper'                 => ' ',
+            'first_name'                   => 'First Name',
+            'first_name_helper'            => ' ',
+            'last_name'                    => 'Last Name',
+            'last_name_helper'             => ' ',
         ],
     ],
     'basicCRM' => [
