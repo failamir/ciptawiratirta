@@ -20,6 +20,41 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="first_name">{{ trans('cruds.user.fields.first_name') }}</label>
+                <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', '') }}">
+                @if($errors->has('first_name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('first_name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.first_name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="last_name">{{ trans('cruds.user.fields.last_name') }}</label>
+                <input class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" id="last_name" value="{{ old('last_name', '') }}">
+                @if($errors->has('last_name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('last_name') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.last_name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.user.fields.gender') }}</label>
+                <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender" id="gender">
+                    <option value disabled {{ old('gender', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\User::GENDER_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('gender', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('gender'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('gender') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.gender_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email') }}" required>
                 @if($errors->has('email'))
@@ -158,21 +193,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.address_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.user.fields.gender') }}</label>
-                <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender" id="gender">
-                    <option value disabled {{ old('gender', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\User::GENDER_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('gender', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('gender'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('gender') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.gender_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="b_o_d">{{ trans('cruds.user.fields.b_o_d') }}</label>

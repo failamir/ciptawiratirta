@@ -98,6 +98,9 @@ class User extends Authenticatable implements HasMedia
 
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
+        'gender',
         'email',
         'email_verified_at',
         'password',
@@ -115,7 +118,6 @@ class User extends Authenticatable implements HasMedia
         'state',
         'city',
         'address',
-        'gender',
         'b_o_d',
         'office_registered_id',
         'created_at',
