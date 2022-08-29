@@ -12,7 +12,8 @@ class Department extends Model
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'departments';
+    // public $table = 'departments';
+    public $table = 'bc_job_categories';
 
     protected $dates = [
         'created_at',

@@ -133,6 +133,7 @@ class User extends Authenticatable implements HasMedia
         'updated_at',
         'deleted_at',
         'two_factor_expires_at',
+        'phone',
     ];
 
     public function __construct(array $attributes = [])

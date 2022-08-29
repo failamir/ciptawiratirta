@@ -32,7 +32,7 @@ class Job extends Model implements HasMedia
         'draft'   => 'draft',
     ];
 
-    public $table = 'jobs';
+    public $table = 'bc_jobs';
 
     protected $appends = [
         'video_cover',

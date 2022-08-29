@@ -16,7 +16,8 @@ class Principal extends Model implements HasMedia
     use InteractsWithMedia;
     use HasFactory;
 
-    public $table = 'principals';
+    // public $table = 'principals';
+    public $table = 'bc_companies';
 
     protected $appends = [
         'logo',

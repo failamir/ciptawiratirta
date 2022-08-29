@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,6 +24,9 @@ class UsersController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if(Auth::user()->roles()->first()->id != 1){
+            abort_if(Gate::denies('create_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
 
         $users = User::with(['roles', 'office_registered', 'experiences', 'media'])->get();
 
@@ -69,7 +73,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        if(Auth::user()->id != $user->id){
+            return redirect()->route('admin.users.index');
+        }
         $roles = Role::pluck('title', 'id');
 
         $office_registereds = Office::pluck('city', 'id')->prepend(trans('global.pleaseSelect'), '');

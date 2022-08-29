@@ -52,10 +52,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if((Auth::user()->roles()->first()->id == 1))
                         <div class="{{ $chart5->options['column_class'] }}">
                             <h3>{!! $chart5->options['chart_title'] !!}</h3>
                             {!! $chart5->renderHtml() !!}
                         </div>
+                        @endif
+                        @if((Auth::user()->roles()->first()->id != 1))
+                        <div class="{{ $chart5->options['column_class'] }}">
+                            <h3>{!! $chart5->options['chart_title'] !!}</h3>
+                            {!! $chart5->renderHtml() !!}
+                        </div>
+                        @endif
                         {{-- Widget - latest entries --}}
                         <div class="{{ $settings6['column_class'] }}" style="overflow-x: auto;">
                             <h3>{{ $settings6['chart_title'] }}</h3>
