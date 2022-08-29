@@ -26,7 +26,22 @@
                             {{ trans('cruds.experience.fields.id') }}
                         </th>
                         <th>
+                            {{ trans('cruds.experience.fields.company_name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.experience.fields.value') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.experience.fields.last_position') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.experience.fields.start_date') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.experience.fields.end_date') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.experience.fields.reason_leave') }}
                         </th>
                         <th>
                             &nbsp;
@@ -43,7 +58,22 @@
                                 {{ $experience->id ?? '' }}
                             </td>
                             <td>
+                                {{ $experience->company_name ?? '' }}
+                            </td>
+                            <td>
                                 {{ $experience->value ?? '' }}
+                            </td>
+                            <td>
+                                {{ $experience->last_position ?? '' }}
+                            </td>
+                            <td>
+                                {{ $experience->start_date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $experience->end_date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $experience->reason_leave ?? '' }}
                             </td>
                             <td>
                                 @can('experience_show')
