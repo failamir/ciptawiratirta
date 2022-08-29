@@ -25,10 +25,50 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.experience.fields.company_name') }}
+                        </th>
+                        <td>
+                            {{ $experience->company_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.experience.fields.value') }}
                         </th>
                         <td>
                             {{ $experience->value }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.experience.fields.last_position') }}
+                        </th>
+                        <td>
+                            {{ $experience->last_position }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.experience.fields.start_date') }}
+                        </th>
+                        <td>
+                            {{ $experience->start_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.experience.fields.end_date') }}
+                        </th>
+                        <td>
+                            {{ $experience->end_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.experience.fields.reason_leave') }}
+                        </th>
+                        <td>
+                            {{ $experience->reason_leave }}
                         </td>
                     </tr>
                 </tbody>

@@ -12,8 +12,7 @@ class Ship extends Model
     use SoftDeletes;
     use HasFactory;
 
-    // public $table = 'ships';
-    public $table = 'bc_company_categories';
+    public $table = 'ships';
 
     protected $dates = [
         'created_at',

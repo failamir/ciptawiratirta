@@ -44,20 +44,6 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <i class="fa fa-phone fa-fw"></i>
-                            </span>
-                        </div>
-                        <input type="text" name="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.phone') }}" value="{{ old('phone', null) }}">
-                        @if($errors->has('phone'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('phone') }}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
                                 <i class="fa fa-lock fa-fw"></i>
                             </span>
                         </div>

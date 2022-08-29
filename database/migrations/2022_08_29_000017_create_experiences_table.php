@@ -10,7 +10,12 @@ class CreateExperiencesTable extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('company_name')->nullable();
             $table->string('value')->nullable();
+            $table->string('last_position')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('reason_leave')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

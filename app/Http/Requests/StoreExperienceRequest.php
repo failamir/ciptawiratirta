@@ -17,7 +17,27 @@ class StoreExperienceRequest extends FormRequest
     public function rules()
     {
         return [
+            'company_name' => [
+                'string',
+                'nullable',
+            ],
             'value' => [
+                'string',
+                'nullable',
+            ],
+            'last_position' => [
+                'string',
+                'nullable',
+            ],
+            'start_date' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'end_date' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable',
+            ],
+            'reason_leave' => [
                 'string',
                 'nullable',
             ],
