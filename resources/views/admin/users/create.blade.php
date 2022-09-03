@@ -373,6 +373,76 @@
                 <span class="help-block">{{ trans('cruds.user.fields.photo_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="nationality">{{ trans('cruds.user.fields.nationality') }}</label>
+                <input class="form-control {{ $errors->has('nationality') ? 'is-invalid' : '' }}" type="text" name="nationality" id="nationality" value="{{ old('nationality', '') }}">
+                @if($errors->has('nationality'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nationality') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.nationality_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="home_airport">{{ trans('cruds.user.fields.home_airport') }}</label>
+                <input class="form-control {{ $errors->has('home_airport') ? 'is-invalid' : '' }}" type="text" name="home_airport" id="home_airport" value="{{ old('home_airport', '') }}">
+                @if($errors->has('home_airport'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('home_airport') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.home_airport_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="post_code">{{ trans('cruds.user.fields.post_code') }}</label>
+                <input class="form-control {{ $errors->has('post_code') ? 'is-invalid' : '' }}" type="text" name="post_code" id="post_code" value="{{ old('post_code', '') }}">
+                @if($errors->has('post_code'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('post_code') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.post_code_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="weight">{{ trans('cruds.user.fields.weight') }}</label>
+                <input class="form-control {{ $errors->has('weight') ? 'is-invalid' : '' }}" type="number" name="weight" id="weight" value="{{ old('weight', '') }}" step="1">
+                @if($errors->has('weight'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('weight') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.weight_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="height">{{ trans('cruds.user.fields.height') }}</label>
+                <input class="form-control {{ $errors->has('height') ? 'is-invalid' : '' }}" type="number" name="height" id="height" value="{{ old('height', '') }}" step="1">
+                @if($errors->has('height'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('height') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.height_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="birth_place">{{ trans('cruds.user.fields.birth_place') }}</label>
+                <input class="form-control {{ $errors->has('birth_place') ? 'is-invalid' : '' }}" type="text" name="birth_place" id="birth_place" value="{{ old('birth_place', '') }}">
+                @if($errors->has('birth_place'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('birth_place') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.birth_place_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="department_applied">{{ trans('cruds.user.fields.department_applied') }}</label>
+                <input class="form-control {{ $errors->has('department_applied') ? 'is-invalid' : '' }}" type="text" name="department_applied" id="department_applied" value="{{ old('department_applied', '') }}">
+                @if($errors->has('department_applied'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('department_applied') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.department_applied_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

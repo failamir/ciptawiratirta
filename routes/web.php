@@ -28,24 +28,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('users/ckmedia', 'UsersController@storeCKEditorImages')->name('users.storeCKEditorImages');
     Route::resource('users', 'UsersController');
 
-    // Crm Status
-    Route::delete('crm-statuses/destroy', 'CrmStatusController@massDestroy')->name('crm-statuses.massDestroy');
-    Route::resource('crm-statuses', 'CrmStatusController');
-
-    // Crm Customer
-    Route::delete('crm-customers/destroy', 'CrmCustomerController@massDestroy')->name('crm-customers.massDestroy');
-    Route::resource('crm-customers', 'CrmCustomerController');
-
-    // Crm Note
-    Route::delete('crm-notes/destroy', 'CrmNoteController@massDestroy')->name('crm-notes.massDestroy');
-    Route::resource('crm-notes', 'CrmNoteController');
-
-    // Crm Document
-    Route::delete('crm-documents/destroy', 'CrmDocumentController@massDestroy')->name('crm-documents.massDestroy');
-    Route::post('crm-documents/media', 'CrmDocumentController@storeMedia')->name('crm-documents.storeMedia');
-    Route::post('crm-documents/ckmedia', 'CrmDocumentController@storeCKEditorImages')->name('crm-documents.storeCKEditorImages');
-    Route::resource('crm-documents', 'CrmDocumentController');
-
     // Office
     Route::delete('offices/destroy', 'OfficeController@massDestroy')->name('offices.massDestroy');
     Route::resource('offices', 'OfficeController');
@@ -95,6 +77,56 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Interview
     Route::delete('interviews/destroy', 'InterviewController@massDestroy')->name('interviews.massDestroy');
     Route::resource('interviews', 'InterviewController');
+
+    // Ship Experience
+    Route::delete('ship-experiences/destroy', 'ShipExperienceController@massDestroy')->name('ship-experiences.massDestroy');
+    Route::post('ship-experiences/media', 'ShipExperienceController@storeMedia')->name('ship-experiences.storeMedia');
+    Route::post('ship-experiences/ckmedia', 'ShipExperienceController@storeCKEditorImages')->name('ship-experiences.storeCKEditorImages');
+    Route::resource('ship-experiences', 'ShipExperienceController');
+
+    // Hotel Experience
+    Route::delete('hotel-experiences/destroy', 'HotelExperienceController@massDestroy')->name('hotel-experiences.massDestroy');
+    Route::post('hotel-experiences/media', 'HotelExperienceController@storeMedia')->name('hotel-experiences.storeMedia');
+    Route::post('hotel-experiences/ckmedia', 'HotelExperienceController@storeCKEditorImages')->name('hotel-experiences.storeCKEditorImages');
+    Route::resource('hotel-experiences', 'HotelExperienceController');
+
+    // Deck Certificates
+    Route::delete('deck-certificates/destroy', 'DeckCertificatesController@massDestroy')->name('deck-certificates.massDestroy');
+    Route::post('deck-certificates/media', 'DeckCertificatesController@storeMedia')->name('deck-certificates.storeMedia');
+    Route::post('deck-certificates/ckmedia', 'DeckCertificatesController@storeCKEditorImages')->name('deck-certificates.storeCKEditorImages');
+    Route::resource('deck-certificates', 'DeckCertificatesController');
+
+    // Hotel Certificates
+    Route::delete('hotel-certificates/destroy', 'HotelCertificatesController@massDestroy')->name('hotel-certificates.massDestroy');
+    Route::post('hotel-certificates/media', 'HotelCertificatesController@storeMedia')->name('hotel-certificates.storeMedia');
+    Route::post('hotel-certificates/ckmedia', 'HotelCertificatesController@storeCKEditorImages')->name('hotel-certificates.storeCKEditorImages');
+    Route::resource('hotel-certificates', 'HotelCertificatesController');
+
+    // Travel Documents
+    Route::delete('travel-documents/destroy', 'TravelDocumentsController@massDestroy')->name('travel-documents.massDestroy');
+    Route::post('travel-documents/media', 'TravelDocumentsController@storeMedia')->name('travel-documents.storeMedia');
+    Route::post('travel-documents/ckmedia', 'TravelDocumentsController@storeCKEditorImages')->name('travel-documents.storeCKEditorImages');
+    Route::resource('travel-documents', 'TravelDocumentsController');
+
+    // Formal Education
+    Route::delete('formal-educations/destroy', 'FormalEducationController@massDestroy')->name('formal-educations.massDestroy');
+    Route::resource('formal-educations', 'FormalEducationController');
+
+    // References
+    Route::delete('references/destroy', 'ReferencesController@massDestroy')->name('references.massDestroy');
+    Route::post('references/media', 'ReferencesController@storeMedia')->name('references.storeMedia');
+    Route::post('references/ckmedia', 'ReferencesController@storeCKEditorImages')->name('references.storeCKEditorImages');
+    Route::resource('references', 'ReferencesController');
+
+    // Emergency Contact
+    Route::delete('emergency-contacts/destroy', 'EmergencyContactController@massDestroy')->name('emergency-contacts.massDestroy');
+    Route::resource('emergency-contacts', 'EmergencyContactController');
+
+    // Next Of Kin
+    Route::delete('next-of-kins/destroy', 'NextOfKinController@massDestroy')->name('next-of-kins.massDestroy');
+    Route::post('next-of-kins/media', 'NextOfKinController@storeMedia')->name('next-of-kins.storeMedia');
+    Route::post('next-of-kins/ckmedia', 'NextOfKinController@storeCKEditorImages')->name('next-of-kins.storeCKEditorImages');
+    Route::resource('next-of-kins', 'NextOfKinController');
 
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');

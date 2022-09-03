@@ -295,6 +295,62 @@
                             @endif
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.nationality') }}
+                        </th>
+                        <td>
+                            {{ $user->nationality }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.home_airport') }}
+                        </th>
+                        <td>
+                            {{ $user->home_airport }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.post_code') }}
+                        </th>
+                        <td>
+                            {{ $user->post_code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.weight') }}
+                        </th>
+                        <td>
+                            {{ $user->weight }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.height') }}
+                        </th>
+                        <td>
+                            {{ $user->height }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.birth_place') }}
+                        </th>
+                        <td>
+                            {{ $user->birth_place }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.department_applied') }}
+                        </th>
+                        <td>
+                            {{ $user->department_applied }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

@@ -76,294 +76,390 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 17,
-                'title' => 'basic_c_r_m_access',
-            ],
-            [
-                'id'    => 18,
-                'title' => 'crm_status_create',
-            ],
-            [
-                'id'    => 19,
-                'title' => 'crm_status_edit',
-            ],
-            [
-                'id'    => 20,
-                'title' => 'crm_status_show',
-            ],
-            [
-                'id'    => 21,
-                'title' => 'crm_status_delete',
-            ],
-            [
-                'id'    => 22,
-                'title' => 'crm_status_access',
-            ],
-            [
-                'id'    => 23,
-                'title' => 'crm_customer_create',
-            ],
-            [
-                'id'    => 24,
-                'title' => 'crm_customer_edit',
-            ],
-            [
-                'id'    => 25,
-                'title' => 'crm_customer_show',
-            ],
-            [
-                'id'    => 26,
-                'title' => 'crm_customer_delete',
-            ],
-            [
-                'id'    => 27,
-                'title' => 'crm_customer_access',
-            ],
-            [
-                'id'    => 28,
-                'title' => 'crm_note_create',
-            ],
-            [
-                'id'    => 29,
-                'title' => 'crm_note_edit',
-            ],
-            [
-                'id'    => 30,
-                'title' => 'crm_note_show',
-            ],
-            [
-                'id'    => 31,
-                'title' => 'crm_note_delete',
-            ],
-            [
-                'id'    => 32,
-                'title' => 'crm_note_access',
-            ],
-            [
-                'id'    => 33,
-                'title' => 'crm_document_create',
-            ],
-            [
-                'id'    => 34,
-                'title' => 'crm_document_edit',
-            ],
-            [
-                'id'    => 35,
-                'title' => 'crm_document_show',
-            ],
-            [
-                'id'    => 36,
-                'title' => 'crm_document_delete',
-            ],
-            [
-                'id'    => 37,
-                'title' => 'crm_document_access',
-            ],
-            [
-                'id'    => 38,
                 'title' => 'office_create',
             ],
             [
-                'id'    => 39,
+                'id'    => 18,
                 'title' => 'office_edit',
             ],
             [
-                'id'    => 40,
+                'id'    => 19,
                 'title' => 'office_show',
             ],
             [
-                'id'    => 41,
+                'id'    => 20,
                 'title' => 'office_delete',
             ],
             [
-                'id'    => 42,
+                'id'    => 21,
                 'title' => 'office_access',
             ],
             [
-                'id'    => 43,
+                'id'    => 22,
                 'title' => 'audit_log_show',
             ],
             [
-                'id'    => 44,
+                'id'    => 23,
                 'title' => 'audit_log_access',
             ],
             [
-                'id'    => 45,
+                'id'    => 24,
                 'title' => 'user_alert_create',
             ],
             [
-                'id'    => 46,
+                'id'    => 25,
                 'title' => 'user_alert_show',
             ],
             [
-                'id'    => 47,
+                'id'    => 26,
                 'title' => 'user_alert_delete',
             ],
             [
-                'id'    => 48,
+                'id'    => 27,
                 'title' => 'user_alert_access',
             ],
             [
-                'id'    => 49,
+                'id'    => 28,
                 'title' => 'sgp_create',
             ],
             [
-                'id'    => 50,
+                'id'    => 29,
                 'title' => 'sgp_edit',
             ],
             [
-                'id'    => 51,
+                'id'    => 30,
                 'title' => 'sgp_show',
             ],
             [
-                'id'    => 52,
+                'id'    => 31,
                 'title' => 'sgp_delete',
             ],
             [
-                'id'    => 53,
+                'id'    => 32,
                 'title' => 'sgp_access',
             ],
             [
-                'id'    => 54,
+                'id'    => 33,
                 'title' => 'job_create',
             ],
             [
-                'id'    => 55,
+                'id'    => 34,
                 'title' => 'job_edit',
             ],
             [
-                'id'    => 56,
+                'id'    => 35,
                 'title' => 'job_show',
             ],
             [
-                'id'    => 57,
+                'id'    => 36,
                 'title' => 'job_delete',
             ],
             [
-                'id'    => 58,
+                'id'    => 37,
                 'title' => 'job_access',
             ],
             [
-                'id'    => 59,
+                'id'    => 38,
                 'title' => 'ship_create',
             ],
             [
-                'id'    => 60,
+                'id'    => 39,
                 'title' => 'ship_edit',
             ],
             [
-                'id'    => 61,
+                'id'    => 40,
                 'title' => 'ship_show',
             ],
             [
-                'id'    => 62,
+                'id'    => 41,
                 'title' => 'ship_delete',
             ],
             [
-                'id'    => 63,
+                'id'    => 42,
                 'title' => 'ship_access',
             ],
             [
-                'id'    => 64,
+                'id'    => 43,
                 'title' => 'department_create',
             ],
             [
-                'id'    => 65,
+                'id'    => 44,
                 'title' => 'department_edit',
             ],
             [
-                'id'    => 66,
+                'id'    => 45,
                 'title' => 'department_show',
             ],
             [
-                'id'    => 67,
+                'id'    => 46,
                 'title' => 'department_delete',
             ],
             [
-                'id'    => 68,
+                'id'    => 47,
                 'title' => 'department_access',
             ],
             [
-                'id'    => 69,
+                'id'    => 48,
                 'title' => 'principal_create',
             ],
             [
-                'id'    => 70,
+                'id'    => 49,
                 'title' => 'principal_edit',
             ],
             [
-                'id'    => 71,
+                'id'    => 50,
                 'title' => 'principal_show',
             ],
             [
-                'id'    => 72,
+                'id'    => 51,
                 'title' => 'principal_delete',
             ],
             [
-                'id'    => 73,
+                'id'    => 52,
                 'title' => 'principal_access',
             ],
             [
-                'id'    => 74,
+                'id'    => 53,
                 'title' => 'experience_create',
             ],
             [
-                'id'    => 75,
+                'id'    => 54,
                 'title' => 'experience_edit',
             ],
             [
-                'id'    => 76,
+                'id'    => 55,
                 'title' => 'experience_show',
             ],
             [
-                'id'    => 77,
+                'id'    => 56,
                 'title' => 'experience_delete',
             ],
             [
-                'id'    => 78,
+                'id'    => 57,
                 'title' => 'experience_access',
             ],
             [
-                'id'    => 79,
+                'id'    => 58,
                 'title' => 'departure_create',
             ],
             [
-                'id'    => 80,
+                'id'    => 59,
                 'title' => 'departure_edit',
             ],
             [
-                'id'    => 81,
+                'id'    => 60,
                 'title' => 'departure_show',
             ],
             [
-                'id'    => 82,
+                'id'    => 61,
                 'title' => 'departure_delete',
             ],
             [
-                'id'    => 83,
+                'id'    => 62,
                 'title' => 'departure_access',
             ],
             [
-                'id'    => 84,
+                'id'    => 63,
                 'title' => 'interview_create',
             ],
             [
-                'id'    => 85,
+                'id'    => 64,
                 'title' => 'interview_edit',
             ],
             [
-                'id'    => 86,
+                'id'    => 65,
                 'title' => 'interview_show',
             ],
             [
-                'id'    => 87,
+                'id'    => 66,
                 'title' => 'interview_delete',
             ],
             [
-                'id'    => 88,
+                'id'    => 67,
                 'title' => 'interview_access',
             ],
             [
+                'id'    => 68,
+                'title' => 'ship_experience_create',
+            ],
+            [
+                'id'    => 69,
+                'title' => 'ship_experience_edit',
+            ],
+            [
+                'id'    => 70,
+                'title' => 'ship_experience_show',
+            ],
+            [
+                'id'    => 71,
+                'title' => 'ship_experience_delete',
+            ],
+            [
+                'id'    => 72,
+                'title' => 'ship_experience_access',
+            ],
+            [
+                'id'    => 73,
+                'title' => 'hotel_experience_create',
+            ],
+            [
+                'id'    => 74,
+                'title' => 'hotel_experience_edit',
+            ],
+            [
+                'id'    => 75,
+                'title' => 'hotel_experience_show',
+            ],
+            [
+                'id'    => 76,
+                'title' => 'hotel_experience_delete',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'hotel_experience_access',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'deck_certificate_create',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'deck_certificate_edit',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'deck_certificate_show',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'deck_certificate_delete',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'deck_certificate_access',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'hotel_certificate_create',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'hotel_certificate_edit',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'hotel_certificate_show',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'hotel_certificate_delete',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'hotel_certificate_access',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'travel_document_create',
+            ],
+            [
                 'id'    => 89,
+                'title' => 'travel_document_edit',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'travel_document_show',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'travel_document_delete',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'travel_document_access',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'formal_education_create',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'formal_education_edit',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'formal_education_show',
+            ],
+            [
+                'id'    => 96,
+                'title' => 'formal_education_delete',
+            ],
+            [
+                'id'    => 97,
+                'title' => 'formal_education_access',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'reference_create',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'reference_edit',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'reference_show',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'reference_delete',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'reference_access',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'emergency_contact_create',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'emergency_contact_edit',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'emergency_contact_show',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'emergency_contact_delete',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'emergency_contact_access',
+            ],
+            [
+                'id'    => 108,
+                'title' => 'next_of_kin_create',
+            ],
+            [
+                'id'    => 109,
+                'title' => 'next_of_kin_edit',
+            ],
+            [
+                'id'    => 110,
+                'title' => 'next_of_kin_show',
+            ],
+            [
+                'id'    => 111,
+                'title' => 'next_of_kin_delete',
+            ],
+            [
+                'id'    => 112,
+                'title' => 'next_of_kin_access',
+            ],
+            [
+                'id'    => 113,
                 'title' => 'profile_password_edit',
             ],
         ];
