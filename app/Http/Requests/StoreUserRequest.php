@@ -93,6 +93,38 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'nationality' => [
+                'string',
+                'nullable',
+            ],
+            'home_airport' => [
+                'string',
+                'nullable',
+            ],
+            'post_code' => [
+                'string',
+                'nullable',
+            ],
+            'weight' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'height' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'birth_place' => [
+                'string',
+                'nullable',
+            ],
+            'department_applied' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

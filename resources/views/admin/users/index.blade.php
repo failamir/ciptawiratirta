@@ -122,6 +122,27 @@
                             {{ trans('cruds.user.fields.photo') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.nationality') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.home_airport') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.post_code') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.weight') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.height') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.birth_place') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.department_applied') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -248,6 +269,27 @@
                                         <img src="{{ $user->photo->getUrl('thumb') }}">
                                     </a>
                                 @endif
+                            </td>
+                            <td>
+                                {{ $user->nationality ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->home_airport ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->post_code ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->weight ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->height ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->birth_place ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->department_applied ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')

@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
                 'password'           => bcrypt('password'),
                 'remember_token'     => null,
                 'verified'           => 1,
-                'verified_at'        => '2022-08-28 20:17:48',
+                'verified_at'        => '2022-09-03 10:00:40',
                 'ktp'                => '',
                 'visa'               => '',
                 'bst_ccm'            => '',
@@ -32,6 +32,11 @@ class UsersTableSeeder extends Seeder
                 'contact_no'         => '',
                 'first_name'         => '',
                 'last_name'          => '',
+                'nationality'        => '',
+                'home_airport'       => '',
+                'post_code'          => '',
+                'birth_place'        => '',
+                'department_applied' => '',
             ],
         ];
 

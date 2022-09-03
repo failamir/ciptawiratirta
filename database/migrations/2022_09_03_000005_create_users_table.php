@@ -41,6 +41,13 @@ class CreateUsersTable extends Migration
             $table->string('ccm')->nullable();
             $table->string('application_form')->nullable();
             $table->string('contact_no')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('home_airport')->nullable();
+            $table->string('post_code')->nullable();
+            $table->integer('weight')->nullable();
+            $table->integer('height')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->string('department_applied')->nullable();
             $table->datetime('two_factor_expires_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
