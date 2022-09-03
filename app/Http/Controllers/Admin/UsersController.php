@@ -22,6 +22,7 @@ class UsersController extends Controller
 
     public function index()
     {
+        var_dump(Auth::user()->roles()->first()); die;
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::with(['roles', 'office_registered', 'experiences', 'media'])->get();
