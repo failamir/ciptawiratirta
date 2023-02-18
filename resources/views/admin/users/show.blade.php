@@ -351,6 +351,14 @@
                             {{ $user->department_applied }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.testimoni') }}
+                        </th>
+                        <td>
+                            {{ App\Models\User::TESTIMONI_RADIO[$user->testimoni] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

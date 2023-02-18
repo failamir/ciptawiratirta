@@ -54,6 +54,11 @@ class User extends Authenticatable implements HasMedia
         'female' => 'female',
     ];
 
+    public const TESTIMONI_RADIO = [
+        'belum' => 'belum',
+        'sudah' => 'sudah',
+    ];
+
     public const VC_COVID_RADIO = [
         'Y'   => 'Y',
         'N'   => 'N',
@@ -137,6 +142,7 @@ class User extends Authenticatable implements HasMedia
         'height',
         'birth_place',
         'department_applied',
+        'testimoni',
         'updated_at',
         'deleted_at',
         'two_factor_expires_at',

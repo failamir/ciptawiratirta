@@ -443,6 +443,21 @@
                 <span class="help-block">{{ trans('cruds.user.fields.department_applied_helper') }}</span>
             </div>
             <div class="form-group">
+                <label>{{ trans('cruds.user.fields.testimoni') }}</label>
+                @foreach(App\Models\User::TESTIMONI_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('testimoni') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="testimoni_{{ $key }}" name="testimoni" value="{{ $key }}" {{ old('testimoni', 'belum') === (string) $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="testimoni_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('testimoni'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('testimoni') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.testimoni_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

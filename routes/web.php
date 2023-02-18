@@ -128,6 +128,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('next-of-kins/ckmedia', 'NextOfKinController@storeCKEditorImages')->name('next-of-kins.storeCKEditorImages');
     Route::resource('next-of-kins', 'NextOfKinController');
 
+    // Testimoni
+    Route::delete('testimonis/destroy', 'TestimoniController@massDestroy')->name('testimonis.massDestroy');
+    Route::post('testimonis/media', 'TestimoniController@storeMedia')->name('testimonis.storeMedia');
+    Route::post('testimonis/ckmedia', 'TestimoniController@storeCKEditorImages')->name('testimonis.storeCKEditorImages');
+    Route::resource('testimonis', 'TestimoniController');
+
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');
