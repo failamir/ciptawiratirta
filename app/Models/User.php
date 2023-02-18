@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use \DateTimeInterface;
+use DateTimeInterface;
 use App\Notifications\VerifyUserNotification;
 use Carbon\Carbon;
 use Hash;
