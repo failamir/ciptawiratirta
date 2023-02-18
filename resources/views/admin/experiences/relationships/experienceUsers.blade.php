@@ -142,6 +142,9 @@
                             {{ trans('cruds.user.fields.department_applied') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.testimoni') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -289,6 +292,9 @@
                             </td>
                             <td>
                                 {{ $user->department_applied ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\Models\User::TESTIMONI_RADIO[$user->testimoni] ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')

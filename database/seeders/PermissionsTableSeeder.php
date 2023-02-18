@@ -460,6 +460,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 113,
+                'title' => 'testimoni_create',
+            ],
+            [
+                'id'    => 114,
+                'title' => 'testimoni_edit',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'testimoni_show',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'testimoni_delete',
+            ],
+            [
+                'id'    => 117,
+                'title' => 'testimoni_access',
+            ],
+            [
+                'id'    => 118,
                 'title' => 'profile_password_edit',
             ],
         ];

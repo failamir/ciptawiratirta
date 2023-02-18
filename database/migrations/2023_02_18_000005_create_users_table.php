@@ -48,6 +48,7 @@ class CreateUsersTable extends Migration
             $table->integer('height')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('department_applied')->nullable();
+            $table->string('testimoni')->nullable();
             $table->datetime('two_factor_expires_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
