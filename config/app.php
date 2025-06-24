@@ -1,5 +1,7 @@
 <?php
+
 use Illuminate\Support\Facades\Facade;
+
 return [
 
     /*
@@ -250,10 +252,10 @@ return [
         ],
     ],
 
-    'version' => "2.5.1",
+    'version' => "1.0",
 
-    'asset_version'=>"1.2.5",
+    'asset_version' => "1.2.5",
 
-    'updater_url'=>"#"
+    'updater_url' => "#"
 
 ];

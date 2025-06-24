@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Candidate\Admin;
 
 use Illuminate\Http\Request;
@@ -12,13 +13,14 @@ use Modules\Language\Models\Language;
 use Modules\Candidate\Models\Category;
 use Modules\Candidate\Models\Candidate;
 use Modules\User\Models\User;
+use Modules\Prescreening\Models\Prescreening;
 
 class CandidateController extends AdminController
 {
     public function __construct()
     {
         $this->setActiveMenu('admin/module/candidate');
-        if(!is_admin()){
+        if (!is_admin()) {
             $this->middleware('verified');
         }
         parent::__construct();
@@ -29,9 +31,9 @@ class CandidateController extends AdminController
         $this->checkPermission('candidate_manage_others');
         $username = $request->query('s');
         $cate_id = $request->query('cate_id');
-        $listUser = \App\User::query()->where('role_id',3);
+        $listUser = \App\User::query()->where('role_id', 3);
         if (!empty($username)) {
-            $listUser->where(function($query) use($username){
+            $listUser->where(function ($query) use ($username) {
                 $query->where('first_name', 'LIKE', '%' . $username . '%');
                 $query->orWhere('id',  $username);
                 $query->orWhere('phone',  $username);
@@ -42,9 +44,11 @@ class CandidateController extends AdminController
 
         if (!empty($cate_id)) {
             $listUser->whereHas(
-                'candidate.categories', function($q) use ($cate_id){
-                $q->where('bc_candidate_categories.cat_id', $cate_id);
-            });
+                'candidate.categories',
+                function ($q) use ($cate_id) {
+                    $q->where('bc_candidate_categories.cat_id', $cate_id);
+                }
+            );
         }
 
         if (!empty($request->query('status'))) {
@@ -54,12 +58,14 @@ class CandidateController extends AdminController
         if (!empty($request->query('allow_search'))) {
             $allow_search = $request->query('allow_search');
             $listUser->whereHas(
-                'candidate', function($q) use ($allow_search){
-                $q->where('allow_search', $allow_search);
-            });
+                'candidate',
+                function ($q) use ($allow_search) {
+                    $q->where('allow_search', $allow_search);
+                }
+            );
         }
 
-        $listUser->orderBy('id','desc');
+        $listUser->orderBy('id', 'desc');
         $listUser->with(['candidate.cvs.media']);
 
         //$this->filterLang($dataCandidate);
@@ -77,11 +83,55 @@ class CandidateController extends AdminController
                     'class' => 'active'
                 ],
             ],
-            "locale"=>\App::getLocale(),
-            'page_title'=>__("Candidate Management")
+            "locale" => \App::getLocale(),
+            'page_title' => __("Candidate Management")
         ];
         return view('Candidate::admin.candidate.index', $data);
     }
+
+    public function prescreening(Request $request)
+    {
+        $this->setActiveMenu('admin/module/candidate/prescreening');
+        $query = Prescreening::query()->where('status', 'publish');
+        if ($s = $request->get('s')) {
+            $query->where(function ($q) use ($s) {
+                $q->where('title', 'like', '%' . $s . '%');
+            });
+        }
+        if ($orderby = $request->get('orderby')) {
+            switch ($orderby) {
+                case 'oldest':
+                    $query->orderBy('id', 'asc');
+                    break;
+                default:
+                    $query->orderBy('id', 'desc');
+                    break;
+            }
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
+        $rows = $query->paginate(20);
+        $data = [
+            'rows' => $rows
+        ];
+
+        //return to index
+        return redirect()->route('admin.module.candidate.index')->with($data);
+    }
+
+    public function prescreeningDelete(Request $request, $id)
+    {
+        $this->checkPermission('candidate_manage_others');
+        $row = Prescreening::where("id", $id)->first();
+        if (empty($row)) {
+            return redirect()->back()->with('error', __('Job not found!'));
+        }
+        $row->delete();
+        return back()->with('success',  __('Delete successfully!'));
+    }
+
+
 
     public function bulkEdit(Request $request)
     {
@@ -96,15 +146,15 @@ class CandidateController extends AdminController
         }
         if ($action == "delete") {
             foreach ($ids as $id) {
-                if($id == Auth::id()) continue;
+                if ($id == Auth::id()) continue;
                 $query = \App\User::where("id", $id)->first();
                 $candidate = Candidate::where("id", $id)->first();
-                if(!empty($query)){
-                    $query->email.='_d_'.uniqid().rand(0,99999);
+                if (!empty($query)) {
+                    $query->email .= '_d_' . uniqid() . rand(0, 99999);
                     $query->save();
                     $query->delete();
 
-                    if(!empty($candidate)){
+                    if (!empty($candidate)) {
                         $candidate->delete();
                     }
                 }
@@ -122,26 +172,27 @@ class CandidateController extends AdminController
         return redirect()->back()->with('success', __('Update success!'));
     }
 
-    public function trans($id,$locale){
+    public function trans($id, $locale)
+    {
         $row = Candidate::find($id);
 
-        if(empty($row)){
-            return redirect()->back()->with("danger",__("Candidate does not exists"));
+        if (empty($row)) {
+            return redirect()->back()->with("danger", __("Candidate does not exists"));
         }
 
-        $translated = Candidate::query()->where('origin_id',$id)->where('lang',$locale)->first();
-        if(!empty($translated)){
+        $translated = Candidate::query()->where('origin_id', $id)->where('lang', $locale)->first();
+        if (!empty($translated)) {
             redirect($translated->getEditUrl());
         }
 
-        $language = Language::where('locale',$locale)->first();
-        if(empty($language)){
-            return redirect()->back()->with("danger",__("Language does not exists"));
+        $language = Language::where('locale', $locale)->first();
+        if (empty($language)) {
+            return redirect()->back()->with("danger", __("Language does not exists"));
         }
 
         $new = $row->replicate();
 
-        if(!$row->origin_id){
+        if (!$row->origin_id) {
             $new->origin_id = $row->id;
         }
 
@@ -153,19 +204,20 @@ class CandidateController extends AdminController
         return redirect($new->getEditUrl());
     }
 
-    function myApplied(Request $request){
+    function myApplied(Request $request)
+    {
         $this->setActiveMenu('admin/module/candidate/my-applied');
         $query = JobCandidate::with(['jobInfo', 'candidateInfo', 'cvInfo'])->where('candidate_id', Auth::id());
-        if($s = $request->get('s')){
-            $query->whereHas('jobInfo', function ($q) use ($s){
-                $q->where("title", 'like', '%'.$s.'%');
+        if ($s = $request->get('s')) {
+            $query->whereHas('jobInfo', function ($q) use ($s) {
+                $q->where("title", 'like', '%' . $s . '%');
             });
         }
-        if($status = $request->get('status')){
+        if ($status = $request->get('status')) {
             $query->where('status', $status);
         }
-        if($orderby = $request->get('orderby')){
-            switch ($orderby){
+        if ($orderby = $request->get('orderby')) {
+            switch ($orderby) {
                 case 'oldest':
                     $query->orderBy('id', 'asc');
                     break;
@@ -173,7 +225,7 @@ class CandidateController extends AdminController
                     $query->orderBy('id', 'desc');
                     break;
             }
-        }else{
+        } else {
             $query->orderBy('id', 'desc');
         }
 
@@ -184,7 +236,8 @@ class CandidateController extends AdminController
         return view('Candidate::admin.candidate.my-applied', $data);
     }
 
-    public function deleteJobApplied(Request $request, $id){
+    public function deleteJobApplied(Request $request, $id)
+    {
         $this->checkPermission('candidate_manage');
         $row = JobCandidate::with('jobInfo', 'jobInfo.user', 'candidateInfo', 'company')
             ->where('candidate_id', Auth::id())
@@ -193,7 +246,7 @@ class CandidateController extends AdminController
         if (empty($row)) {
             return redirect()->back()->with('error', __('Job not found!'));
         }
-        if($row->status != 'pending') {
+        if ($row->status != 'pending') {
             return redirect()->back()->with('error', __("Can't delete this item"));
         }
         //Send Email and Notify
@@ -201,19 +254,20 @@ class CandidateController extends AdminController
 
         $row->delete();
 
-        return back()->with('success',  __('Delete successfully!') );
+        return back()->with('success',  __('Delete successfully!'));
     }
 
-    function myContact(Request $request){
+    function myContact(Request $request)
+    {
         $this->setActiveMenu('admin/module/candidate/my-contact');
         $query = CandidateContact::query()
-            ->where(function($q){
+            ->where(function ($q) {
                 $q->whereNull('contact_to')
                     ->orWhere('contact_to', 'candidate');
             })->where('origin_id', Auth::id());
 
-        if($orderby = $request->get('orderby')){
-            switch ($orderby){
+        if ($orderby = $request->get('orderby')) {
+            switch ($orderby) {
                 case 'oldest':
                     $query->orderBy('id', 'asc');
                     break;
@@ -221,7 +275,7 @@ class CandidateController extends AdminController
                     $query->orderBy('id', 'desc');
                     break;
             }
-        }else{
+        } else {
             $query->orderBy('id', 'desc');
         }
 
@@ -237,20 +291,21 @@ class CandidateController extends AdminController
         $pre_selected = $request->query('pre_selected');
         $selected = $request->query('selected');
 
-        if($pre_selected && $selected){
-            if(is_array($selected))
-            {
+        if ($pre_selected && $selected) {
+            if (is_array($selected)) {
 
                 $query = \App\User::query()->whereHas(
-                    'role', function($q){
-                    $q->where('id', 3);
-                });
+                    'role',
+                    function ($q) {
+                        $q->where('id', 3);
+                    }
+                );
                 $imploded_strings = implode("','", $selected);
                 $items = $query->whereIn('id', $selected)->take(50)->orderByRaw(DB::raw("FIELD(id, '$imploded_strings')"))->get();
 
                 $data = [];
-                if(!empty($items) && count($items) > 0){
-                    foreach($items as $key => $val){
+                if (!empty($items) && count($items) > 0) {
+                    foreach ($items as $key => $val) {
                         $data[] = [
                             'id' => $val->id,
                             'text' => $val->getDisplayName()
@@ -258,27 +313,29 @@ class CandidateController extends AdminController
                     }
                 }
                 return response()->json([
-                    'items'=>$data
+                    'items' => $data
                 ]);
             }
             $item = Candidate::find($selected);
-            if(empty($item)){
+            if (empty($item)) {
                 return response()->json([
-                    'text'=>''
+                    'text' => ''
                 ]);
-            }else{
+            } else {
                 return response()->json([
-                    'text'=>$item->getDisplayName()
+                    'text' => $item->getDisplayName()
                 ]);
             }
         }
         $s = $request->query('q');
         $listUser = \App\User::query()->whereHas(
-            'role', function($q){
-            $q->where('id', 3);
-        });
+            'role',
+            function ($q) {
+                $q->where('id', 3);
+            }
+        );
         if (!empty($s)) {
-            $listUser->where(function($query) use($s){
+            $listUser->where(function ($query) use ($s) {
                 $query->where('first_name', 'LIKE', '%' . $s . '%');
                 $query->orWhere('last_name', 'LIKE', '%' . $s . '%');
             });
@@ -286,8 +343,8 @@ class CandidateController extends AdminController
 
         $res = $listUser->orderBy('id', 'desc')->limit(20)->get();
         $data = [];
-        if(!empty($res) && count($res) > 0){
-            foreach($res as $key => $val){
+        if (!empty($res) && count($res) > 0) {
+            foreach ($res as $key => $val) {
                 $data[] = [
                     'id' => $val->id,
                     'text' => $val->getDisplayName()
@@ -298,5 +355,4 @@ class CandidateController extends AdminController
             'results' => $data
         ]);
     }
-
 }

@@ -106,7 +106,7 @@
             </div>
         @endif
 
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="form-group">
                 <label>{{ __('Language') }}</label>
                 <select id="languages" name="languages[]" class="form-control" multiple="multiple">
@@ -156,5 +156,5 @@
                 @endphp
                 {!! \Modules\Media\Helpers\FileHelper::fieldGalleryUpload('gallery', $gallery_id) !!}
             </div>
-        </div>
+        </div> --}}
     </div>
