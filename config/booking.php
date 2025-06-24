@@ -1,0 +1,21 @@
+<?php
+return [
+    'booking_route_prefix'=>env("BOOKING_ROUTER_PREFIX",'booking'),
+    'services'=>[
+    ],
+    'payment_gateways'=>[
+        'paypal'=>Modules\Order\Gateways\PaypalGateway::class,
+        'stripe'=>Modules\Order\Gateways\StripeGateway::class,
+        'payrexx'=>Modules\Order\Gateways\PayrexxGateway::class,
+        'paystack'=>Modules\Order\Gateways\PaystackGateway::class,
+    ],
+    'statuses'=>[
+        'completed',
+        'processing',
+        'confirmed',
+        'cancelled',
+        'paid',
+        'unpaid',
+        'partial_payment',
+    ]
+];

@@ -1,0 +1,1 @@
+<?php echo $__env->make("Layout::app", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/imac/Sites/localhost/Superio.2.6.1/superio.2.6.1/resources/views/layouts/app.blade.php ENDPATH**/ ?>

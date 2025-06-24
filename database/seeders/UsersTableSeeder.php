@@ -1,45 +1,115 @@
 <?php
 
-namespace Database\Seeders;
+    namespace Database\Seeders;
+    use Illuminate\Database\Seeder;
+    use Illuminate\Support\Facades\DB;
+    use Modules\Media\Models\MediaFile;
+    use Modules\Theme\ThemeManager;
+    use Modules\User\Models\Plan;
 
-use App\Models\User;
-use Illuminate\Database\Seeder;
-
-class UsersTableSeeder extends Seeder
-{
-    public function run()
+    class UsersTableSeeder extends Seeder
     {
-        $users = [
-            [
-                'id'                 => 1,
-                'name'               => 'Admin',
-                'email'              => 'admin@admin.com',
-                'password'           => bcrypt('password'),
-                'remember_token'     => null,
-                'verified'           => 1,
-                'verified_at'        => '2023-02-18 17:20:31',
-                'ktp'                => '',
-                'visa'               => '',
-                'bst_ccm'            => '',
-                'passport'           => '',
-                'country'            => '',
-                'state'              => '',
-                'city'               => '',
-                'address'            => '',
-                'verification_token' => '',
-                'two_factor_code'    => '',
-                'age'                => '',
-                'contact_no'         => '',
-                'first_name'         => '',
-                'last_name'          => '',
-                'nationality'        => '',
-                'home_airport'       => '',
-                'post_code'          => '',
-                'birth_place'        => '',
-                'department_applied' => '',
-            ],
-        ];
+        /**
+         * Run the database seeds.
+         *
+         * @return void
+         */
+        public function run()
+        {
 
-        User::insert($users);
+            $active_theme = ThemeManager::current();
+            $active_theme = strtolower(ucfirst($active_theme));
+            $active_theme = ($active_theme == "base") ? "superio" : $active_theme;
+
+            DB::table('users')->insert([
+                'first_name'        => 'Candidate',
+                'last_name'         => '',
+                'email'             => 'candidate@'.$active_theme.'.test',
+                'password'          => bcrypt('123456'),
+                'phone'             => '112 666 888',
+                'status'            => 'publish',
+                'address'            => 'My Dinh, Ha Noi',
+                'country'            => 'Viet Nam',
+                'created_at'        => date("Y-m-d H:i:s"),
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'bio' => 'We\'re designers who have fallen in love with creating spaces for others to reflect, reset, and create. We split our time between two deserts (the Mojave, and the Sonoran). We love the way the heat sinks into our bones, the vibrant sunsets, and the wildlife we get to call our neighbors.'
+            ]);
+            $user = \App\User::where('email', 'candidate@'.$active_theme.'.test')->first();
+            $user->need_update_pw = 1;
+            $user->save();
+            $user->assignRole('candidate');
+
+            DB::table('users')->insert([
+                'first_name'        => 'Employer',
+                'last_name'         => '',
+                'email'             => 'employer@'.$active_theme.'.test',
+                'password'          => bcrypt('123456'),
+                'phone'             => '112 666 888',
+                'status'            => 'publish',
+                'address'            => 'My Dinh, Ha Noi',
+                'country'            => 'Viet Nam',
+                'created_at'        => date("Y-m-d H:i:s"),
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'bio' => 'We\'re designers who have fallen in love with creating spaces for others to reflect, reset, and create. We split our time between two deserts (the Mojave, and the Sonoran). We love the way the heat sinks into our bones, the vibrant sunsets, and the wildlife we get to call our neighbors.'
+            ]);
+            $user = \App\User::where('email', 'employer@'.$active_theme.'.test')->first();
+            $user->need_update_pw = 1;
+            $user->save();
+            $user->assignRole('employer');
+
+            $candidates = [
+                ['Opendoor','Robertson'],
+                ['Checkr','Warren'],
+                ['Esther','Victoria'],
+                ['Bell','Alexander'],
+                ['Floyd','Robert'],
+                ['Jerome','Leslie'],
+            ];
+            foreach ($candidates as $k=>$v){
+                DB::table('users')->insert([
+                    'name'=> $v[0] .' '. $v[1],
+                    'first_name' => $v[0],
+                    'last_name' => $v[1],
+                    'email' =>  strtolower($v[1]).'@'.$active_theme.'.test',
+                    'password' => bcrypt('123456Aa'),
+                    'phone'   => '112 666 888',
+                    'status'   => 'publish',
+                    'address'            => 'My Dinh, Ha Noi',
+                    'country'            => 'Viet Nam',
+                    'created_at' =>  date("Y-m-d H:i:s"),
+                    'avatar_id'     => MediaFile::findMediaByName("candidate-".($k+1))->id,
+                    'bio'=> 'We\'re designers who have fallen in love with creating spaces for others to reflect, reset, and create. We split our time between two deserts (the Mojave, and the Sonoran). We love the way the heat sinks into our bones, the vibrant sunsets, and the wildlife we get to call our neighbors.'
+                ]);
+                $user = \App\User::where('email',strtolower($v[1]).'@'.$active_theme.'.test')->first();
+                $user->assignRole('candidate');
+            }
+
+            $employer = [
+                ['Cameron','Williamson'],
+                ['Miles','Fox'],
+                ['Tom','Hiddleston'],
+                ['Jennifer','Linda'],
+                ['David','John'],
+                ['James','Rebecca']
+            ];
+            foreach ($employer as $k=>$v){
+                DB::table('users')->insert([
+                    'name'=> $v[0] .' '. $v[1],
+                    'first_name' => $v[0],
+                    'last_name' => $v[1],
+                    'email' =>  strtolower($v[1]).'@'.$active_theme.'.test',
+                    'password' => bcrypt('123456Aa'),
+                    'phone'   => '112 666 888',
+                    'status'   => 'publish',
+                    'address'            => 'My Dinh, Ha Noi',
+                    'country'            => 'Viet Nam',
+                    'created_at' =>  date("Y-m-d H:i:s"),
+                    'bio'=> 'We\'re designers who have fallen in love with creating spaces for others to reflect, reset, and create. We split our time between two deserts (the Mojave, and the Sonoran). We love the way the heat sinks into our bones, the vibrant sunsets, and the wildlife we get to call our neighbors.'
+                ]);
+                $user = \App\User::where('email',strtolower($v[1]).'@'.$active_theme.'.test')->first();
+                $user->assignRole('employer');
+            }
+
+
+        }
     }
-}

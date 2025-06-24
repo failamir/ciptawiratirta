@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -15,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'JobCore'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -124,6 +122,23 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+    /*
+   |--------------------------------------------------------------------------
+   | Maintenance Mode Driver
+   |--------------------------------------------------------------------------
+   |
+   | These configuration options determine the driver used to determine and
+   | manage Laravel's "maintenance mode" status. The "cache" driver will
+   | allow maintenance mode to be controlled across multiple machines.
+   |
+   | Supported drivers: "file", "cache"
+   |
+   */
+
+    'maintenance' => [
+        'driver' => 'file',
+        // 'store'  => 'redis',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -173,9 +188,24 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+
+        /*
+        * Custom Service Providers...
+        */
+        \Themes\ThemeServiceProvider::class,
+        Modules\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class, // Xử lý ảnh,
+        Barryvdh\Debugbar\ServiceProvider::class, // Debug BAR
+
         App\Providers\RouteServiceProvider::class,
+        Plugins\ServiceProvider::class,
+        Custom\ServiceProvider::class,
+        App\Providers\AdminRouteServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
+        \App\Providers\PurifierServiceProvider::class
+
 
     ],
 
@@ -189,9 +219,41 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ])->toArray(),
+
+    'debug_blacklist' => [
+        '_ENV' => [
+            'APP_KEY',
+            'DB_PASSWORD',
+            'REDIS_PASSWORD',
+            'MAIL_PASSWORD',
+            'PUSHER_APP_KEY',
+            'PUSHER_APP_SECRET',
+            "REDIS_HOST",
+            "SCRIPT_FILENAME",
+            "DOCUMENT_ROOT"
+        ],
+        '_SERVER' => [
+            'APP_KEY',
+            'DB_PASSWORD',
+            'REDIS_PASSWORD',
+            'MAIL_PASSWORD',
+            'PUSHER_APP_KEY',
+            'PUSHER_APP_SECRET',
+            "MAILGUN_SECRET",
+            "MAIL_USERNAME"
+        ],
+        '_POST' => [
+            'password',
+        ],
+    ],
+
+    'version' => "2.5.1",
+
+    'asset_version'=>"1.2.5",
+
+    'updater_url'=>"#"
 
 ];

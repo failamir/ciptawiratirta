@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Sanctum\Sanctum;
+
 return [
 
     /*
@@ -12,11 +14,10 @@ return [
     | and production domains which access your API via a frontend SPA.
     |
     */
-
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
         'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-        env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
+        Sanctum::currentApplicationUrlWithPort()
     ))),
 
     /*
@@ -30,9 +31,7 @@ return [
     | token that's present on an incoming request for authentication.
     |
     */
-
     'guard' => ['web'],
-
     /*
     |--------------------------------------------------------------------------
     | Expiration Minutes
@@ -43,9 +42,7 @@ return [
     | not expire. This won't tweak the lifetime of first-party sessions.
     |
     */
-
     'expiration' => null,
-
     /*
     |--------------------------------------------------------------------------
     | Sanctum Middleware
@@ -56,10 +53,8 @@ return [
     | request. You may change the middleware listed below as required.
     |
     */
-
     'middleware' => [
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
     ],
-
 ];
