@@ -15,6 +15,6 @@ class Prescreening extends Model
 
     public function candidate()
     {
-        return $this->belongsTo('Modules\User\Models\Candidate');
+        return $this->belongsTo('Modules\Candidate\Models\Candidate');
     }
 }

@@ -21,4 +21,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/user/candidate/profile', 'ProfileController@index')->name('user.candidate.index');
     Route::post('/user/candidate/profile/store', 'ProfileController@store')->name('user.candidate.store');
+    
+    // Prescreening routes
+    Route::get('/user/candidate/prescreening', 'ProfileController@index')->name('user.candidate.prescreening.index');
+    Route::post('/user/candidate/prescreening', 'ProfileController@storePrescreening')->name('user.candidate.prescreening.store');
+    Route::delete('/user/candidate/prescreening/{id}', 'ProfileController@deletePrescreening')->name('user.candidate.prescreening.destroy');
 });

@@ -237,18 +237,203 @@ class Candidate extends BaseModel
         return $url ? $url : '';
     }
 
-    public static function getMinMaxPrice()
+    /**
+     * Get all prescreenings for this candidate
+     */
+    public function prescreenings()
     {
-        $model = parent::selectRaw('MIN( expected_salary ) AS min_price ,
-                                    MAX( expected_salary ) AS max_price ')->where("allow_search", "publish")->first();
-        if (empty($model->min_price) and empty($model->max_price)) {
+        return $this->hasMany('Modules\Prescreening\Models\Prescreening');
+    }
+
+    /**
+     * Add a new prescreening
+     */
+    public function addPrescreening(array $data)
+    {
+        return $this->prescreenings()->create($data);
+    }
+
+    /**
+     * Remove a prescreening by ID
+     */
+    public function removePrescreening($id)
+    {
+        return $this->prescreenings()->where('id', $id)->delete();
+    }
+        {
+            return route('candidate.category.index', ['slug' => $this->slug]);
+        }
+
+        public function cat()
+        {
+            return $this->belongsTo('Modules\Candidate\Models\Category');
+        }
+
+        public function cvs()
+        {
+            return $this->hasMany(CandidateCvs::class, 'origin_id');
+        }
+
+        public function location()
+        {
+            return $this->belongsTo(Location::class, 'location_id', 'id');
+        }
+
+        public static function getAll()
+        {
+            return self::with('cat')->get();
+        }
+
+        public function getDetailUrl($locale = false)
+        {
+            return url(app_get_locale(false, false, '/') . config('candidate.candidate_route_prefix') . "/" . ($this->slug ? $this->slug : $this->id));
+        }
+
+        public function skills()
+        {
+            return $this->belongsToMany(Skill::class, 'bc_candidate_skills', 'origin_id', 'skill_id');
+        }
+
+        public function categories()
+        {
+            return $this->belongsToMany(Category::class, 'bc_candidate_categories', 'origin_id', 'cat_id');
+        }
+
+        public function user()
+        {
+            return $this->belongsTo(User::class, 'id', 'id');
+        }
+
+        public function check_maximum_apply_job()
+        {
+            $maximum = setting_item('candidate_maximum_job_apply', '');
+            if (!empty($maximum)) {
+                $candidate_limit_apply_by = setting_item('candidate_limit_apply_by', '');
+                $job_candidates = JobCandidate::query()->where('candidate_id', $this->id);
+                switch ($candidate_limit_apply_by) {
+                    case 'day':
+                        $today = date('Y-m-d 00:00:00');
+                        $job_candidates = $job_candidates->where('created_at', '>=', $today)->groupBy('job_id')->get()->count();
+                        if ((int)$maximum <= $job_candidates) {
+                            return ['mess' => 'Your turns to apply for job positions (to day) have run out'];
+                        }
+                        break;
+                    case 'month':
+                        $this_month = date('Y-m-01 00:00:00');
+                        $job_candidates = $job_candidates->where('created_at', '>=', $this_month)->groupBy('job_id')->get()->count();
+                        if ((int)$maximum <= $job_candidates) {
+                            return ['mess' => 'Your turns to apply for job positions (this month) have run out'];
+                        }
+                        break;
+                    default:
+                        $job_candidates = $job_candidates->groupBy('job_id')->get()->count();
+                        if ((int)$maximum <= $job_candidates) {
+                            return ['mess' => 'Your turns to apply for job positions have run out'];
+                        }
+                        break;
+                }
+            }
+            return false;
+        }
+
+        public function getCategory()
+        {
+            $categories = [];
+            if (!empty($this->cat_id)) {
+                $catSearch = explode(',', $this->cat_id);
+                $categories = Category::whereIn('id', $catSearch)->get();
+            }
+            return $categories;
+        }
+
+        public static function searchForMenu($q = false)
+        {
+            $query = static::select('id', 'title as name');
+            if (strlen($q)) {
+
+                $query->where('title', 'like', "%" . $q . "%");
+            }
+            $a = $query->limit(10)->get();
+            return $a;
+        }
+
+        static public function getSeoMetaForPageList()
+        {
+            $meta['seo_title'] = setting_item_with_lang("candidate_page_list_seo_title", false, setting_item_with_lang("candidate_page_search_title", false, __("Candidates")));
+            $meta['seo_desc'] = setting_item_with_lang("candidate_page_list_seo_desc");
+            $meta['seo_image'] = setting_item("candidate_page_list_seo_image", null);
+            $meta['seo_share'] = setting_item_with_lang("candidate_page_list_seo_share");
+            $meta['full_url'] = url(config('candidate.candidate_route_prefix'));
+            return $meta;
+        }
+
+        public function getEditUrl()
+        {
+            $lang = $this->lang ?? setting_item("site_locale");
+            return route('user.admin.detail', ['id' => $this->id, "lang" => $lang]);
+        }
+
+        public function dataForApi($forSingle = false)
+        {
+            $translation = $this->translateOrOrigin(app()->getLocale());
+            $data = [
+                'id' => $this->id,
+                'slug' => $this->slug,
+                'title' => $translation->title,
+                'content' => $translation->content,
+                'avatar_id' => $this->avatar_id,
+                'image_url' => get_file_url($this->avatar_id, 'full'),
+                'category' => Category::selectRaw("id,name,slug")->find($this->cat_id) ?? null,
+                'created_at' => display_date($this->created_at),
+                'author' => [
+                    'display_name' => $this->getAuthor->getDisplayName(),
+                    'avatar_url' => $this->getAuthor->getAvatarUrl()
+                ],
+                'url' => $this->getDetailUrl()
+            ];
+            return $data;
+        }
+        public function getGallery($featuredIncluded = false)
+        {
+            if (empty($this->gallery))
+                return $this->gallery;
+            $list_item = [];
+            if ($featuredIncluded and $this->image_id) {
+                $list_item[] = [
+                    'large' => FileHelper::url($this->image_id, 'full'),
+                    'thumb' => FileHelper::url($this->image_id, 'thumb')
+                ];
+            }
+            $items = explode(",", $this->gallery);
+            foreach ($items as $k => $item) {
+                $large = FileHelper::url($item, 'full');
+                $thumb = FileHelper::url($item, 'thumb');
+                $list_item[] = [
+                    'large' => $large,
+                    'thumb' => $thumb
+                ];
+            }
+            return $list_item;
+        }
+
+        public function getImageUrl($size = "medium", $img = '')
+        {
+            $s_image = (!empty($img)) ? $img : $this->image_id;
+            $url = FileHelper::url($s_image, $size);
+            return $url ? $url : '';
+        }
+
+        public static function getMinMaxPrice()
+        {
+            $model = parent::selectRaw('MIN( expected_salary ) AS min_price ,
+                MAX( expected_salary ) AS max_price');
+            $model = $model->where('status', 'publish');
+            $res = $model->first();
             return [
-                0,
-                100
+                'min_price' => (float)$res->min_price,
+                'max_price' => (float)$res->max_price,
             ];
         }
-        return [
-            $model->min_price,
             $model->max_price
         ];
     }

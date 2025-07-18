@@ -49,6 +49,24 @@ class ProfileController extends FrontendController
         return view('Candidate::frontend.profile.edit', $data);
     }
 
+    /**
+     * Delete a prescreening
+     */
+    public function deletePrescreening($id)
+    {
+        if (!is_candidate()) abort(403);
+
+        $user = auth()->user();
+        $candidate = $user->candidate;
+
+        if (!$candidate) abort(404);
+
+        // Delete the prescreening record
+        $candidate->removePrescreening($id);
+
+        return redirect()->back()->with('success', __('Prescreening deleted successfully'));
+    }
+
     public function store(Request $request)
     {
 
@@ -58,6 +76,15 @@ class ProfileController extends FrontendController
             'title'              => 'required|max:255',
             'birthday' => 'nullable|date_format:' . get_date_format()
         ]);
+
+        // Prescreening validation
+        if ($request->has('test_name')) {
+            $request->validate([
+                'test_name' => 'required|string|max:255',
+                'score' => 'nullable|numeric|min:0|max:100',
+                'file_result' => 'nullable|file|mimes:pdf,doc,docx|max:2048' // 2MB max
+            ]);
+        }
 
         $user = auth()->user();
         $candidate = $user->candidate ?? $this->candidate;
@@ -98,6 +125,26 @@ class ProfileController extends FrontendController
             'city',
             'country',
             'location_id',
+        ], $request->input());
+
+        // Handle prescreening data if present
+        if ($request->has('test_name')) {
+            $data = [
+                'test_name' => $request->test_name,
+                'score' => $request->score,
+            ];
+
+            // Handle file upload
+            if ($request->hasFile('file_result')) {
+                $file = $request->file('file_result');
+                $path = $file->store('prescreening-results', 'public');
+                $data['file_result'] = $path;
+            }
+
+            $candidate->addPrescreening($data);
+        }
+
+        $candidate->save();
             'map_lat',
             'map_lng',
             'map_zoom',
