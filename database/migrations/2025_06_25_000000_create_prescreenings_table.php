@@ -10,7 +10,7 @@ class CreatePrescreeningsTable extends Migration
     {
         Schema::create('prescreenings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('candidate_id')->constrained('candidates')->onDelete('cascade');
+            $table->foreignId('candidate_id')->constrained('users')->onDelete('cascade');
             $table->string('test_name');
             $table->decimal('score', 5, 2)->nullable();
             $table->string('file_result')->nullable();
