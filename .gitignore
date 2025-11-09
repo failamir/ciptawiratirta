@@ -29,3 +29,5 @@ composer.lock
 /storage/framework/sessions
 /storage/framework/cache
 /storage/framework
+storage/logs/laravel-2025-06-24.log
+/storage/logs
